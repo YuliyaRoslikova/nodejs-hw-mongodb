@@ -11,13 +11,13 @@ export const setupServer = () => {
 
   app.use(cors());
 
-  // app.use(
-  //   pino({
-  //     transport: {
-  //       target: 'pino-pretty',
-  //     },
-  //   }),
-  // );
+  app.use(
+    pino({
+      transport: {
+        target: 'pino-pretty',
+      },
+    }),
+  );
 
   app.get('/contacts', async (_req, res) => {
     try {
