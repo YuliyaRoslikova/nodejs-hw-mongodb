@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { ContactsCollection } from '../db/models/contact.js';
+import { ContactsCollection } from '../db/models/contacts.js';
 
 export const getAllContacts = async () => {
   const contacts = await ContactsCollection.find();
