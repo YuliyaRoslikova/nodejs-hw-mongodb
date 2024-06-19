@@ -12,12 +12,17 @@ import {
   postContactSchema,
   updateContactSchema,
 } from '../validation/contacts.js';
+import { validateMongoId } from '../middlewares/validateMongoId.js';
 
 const router = Router();
 
 router.get('/contacts', ctrlWrapper(getAllContactsController));
 
-router.get('/contacts/:contactId', ctrlWrapper(getContactByIdController));
+router.get(
+  '/contacts/:contactId',
+  validateMongoId,
+  ctrlWrapper(getContactByIdController),
+);
 
 router.post(
   '/contacts',
@@ -27,10 +32,15 @@ router.post(
 
 router.patch(
   '/contacts/:contactId',
+  validateMongoId,
   validateBody(updateContactSchema),
   ctrlWrapper(patchContactController),
 );
 
-router.delete('/contacts/:contactId', ctrlWrapper(deleteContactController));
+router.delete(
+  '/contacts/:contactId',
+  validateMongoId,
+  ctrlWrapper(deleteContactController),
+);
 
 export default router;

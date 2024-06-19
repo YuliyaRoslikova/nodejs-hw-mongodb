@@ -41,6 +41,7 @@ export const getContactByIdController = async (req, res, next) => {
       message: `Successfully found contact with id ${contactId}!`,
       data: contact,
     });
+    // eslint-disable-next-line no-unused-vars
   } catch (e) {
     next(createHttpError(404, 'Contact not found!'));
   }

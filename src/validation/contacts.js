@@ -8,13 +8,13 @@ export const postContactSchema = Joi.object({
     'any.required': 'name is required',
   }),
   phoneNumber: Joi.string()
-    .regex(/^[0-9]{10}$/)
+    .regex(/^\+?\d+$/)
     .min(3)
     .max(20)
     .required()
     .messages({
       'string.base': 'phoneNumber should be a string',
-      'string.regex': 'phoneNumber should include numbers 0-9',
+      'string.regex': 'phoneNumber should include +',
       'string.min': 'phoneNumber should have at least {#limit} characters',
       'string.max': 'phoneNumber should have at most {#limit} characters',
       'any.required': 'phoneNumber is required',
@@ -41,12 +41,12 @@ export const updateContactSchema = Joi.object({
     'string.max': 'name should have at most {#limit} characters',
   }),
   phoneNumber: Joi.string()
-    .regex(/^[0-9]{10}$/)
+    .regex(/^\+?\d+$/)
     .min(3)
     .max(20)
     .messages({
       'string.base': 'phoneNumber should be a string',
-      'string.regex': 'phoneNumber should include numbers 0-9',
+      'string.regex': 'phoneNumber should include +',
       'string.min': 'phoneNumber should have at least {#limit} characters',
       'string.max': 'phoneNumber should have at most {#limit} characters',
     }),
