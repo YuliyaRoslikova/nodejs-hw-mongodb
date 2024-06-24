@@ -10,6 +10,7 @@ export const getAllContacts = async ({
   sortBy = '_id',
   type = null,
   isFavourite = null,
+  userId,
 }) => {
   const limit = perPage;
   const skip = (page - 1) * perPage;
@@ -19,6 +20,8 @@ export const getAllContacts = async ({
   if (typeof isFavourite === 'boolean') filter.isFavourite = isFavourite;
 
   const contactsQuery = ContactsCollection.find(filter);
+
+  contactsQuery.where('userId').equals(userId);
 
   const contactsCount = await ContactsCollection.find(filter)
     .merge(contactsQuery)
@@ -38,20 +41,23 @@ export const getAllContacts = async ({
   };
 };
 
-export const getContactById = async (id) => {
+export const getContact = async (id, userId) => {
   if (!mongoose.Types.ObjectId.isValid(id)) throw new Error('invalid id');
-  const contact = await ContactsCollection.findById(id);
+  const contact = await ContactsCollection.findOne({ _id: id, userId });
   return contact;
 };
 
-export const createContact = async (payload) => {
-  const contact = await ContactsCollection.create(payload);
+export const createContact = async (payload, userId) => {
+  const contact = await ContactsCollection.create({
+    ...payload,
+    userId,
+  });
   return contact;
 };
 
-export const updateContact = async (Id, payload) => {
+export const updateContact = async (id, payload, userId) => {
   const rawContact = await ContactsCollection.findOneAndUpdate(
-    { _id: Id },
+    { _id: id, userId },
     payload,
     { new: true },
   );
@@ -61,7 +67,10 @@ export const updateContact = async (Id, payload) => {
   return rawContact;
 };
 
-export const deleteContact = async (contactId) => {
-  const contact = await ContactsCollection.findByIdAndDelete(contactId);
+export const deleteContact = async (id, userId) => {
+  const contact = await ContactsCollection.findOneAndDelete({
+    _id: id,
+    userId,
+  });
   return contact;
 };

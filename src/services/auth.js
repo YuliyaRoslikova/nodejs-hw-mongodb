@@ -44,7 +44,7 @@ export const loginUser = async (payload) => {
 
   const session = createSession(user._id);
 
-  return await SessionsCollection.create(session);
+  return await SessionsCollection.create({ ...session, userId: user._id });
 };
 
 export const logoutUser = async (sessionId) => {
