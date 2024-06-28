@@ -87,7 +87,7 @@ export const requestResetToken = async (email) => {
   if (!user) {
     throw createHttpError(404, 'User not found');
   }
-  console.log('00000000', env('JWT_SECRET'));
+
   const resetToken = jwt.sign(
     {
       sub: user._id,
@@ -98,8 +98,7 @@ export const requestResetToken = async (email) => {
       expiresIn: '5m',
     },
   );
-  console.log('11111111111', env(SMTP.SMTP_FROM));
-  console.log('222222222', email);
+
   try {
     await sendEmail({
       to: email,
