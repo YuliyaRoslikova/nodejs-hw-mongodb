@@ -14,6 +14,7 @@ import {
 } from '../validation/contacts.js';
 import { validateMongoId } from '../middlewares/validateMongoId.js';
 import { authenticate } from '../middlewares/authenticate.js';
+import { upload } from '../middlewares/upload.js';
 
 const contactsRouter = Router();
 
@@ -29,6 +30,7 @@ contactsRouter.get(
 
 contactsRouter.post(
   '/',
+  upload.single('photo'),
   validateBody(postContactSchema),
   ctrlWrapper(createContactController),
 );
@@ -36,6 +38,7 @@ contactsRouter.post(
 contactsRouter.patch(
   '/:contactId',
   validateMongoId,
+  upload.single('photo'),
   validateBody(updateContactSchema),
   ctrlWrapper(patchContactController),
 );
