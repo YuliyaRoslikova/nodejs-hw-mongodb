@@ -2,19 +2,19 @@
   "openapi": "3.1.0",
   "info": {
     "version": "1.0.0",
-    "title": "<Contacts web app>",
+    "title": "Contacts web app",
     "license": {
       "name": "Apache 2.0",
-      "url": "<http://www.apache.org/licenses/LICENSE-2.0.html>"
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "description": "<This is a documentation of contacts web app>\n"
+    "description": "This is a documentation of contacts web app"
   },
   "servers": [
     {
-      "url": "<http://localhost:3000>"
+      "url": "http://localhost:3000"
     },
     {
-      "url": "<https://nodejs-hw-mongodb-0he4.onrender.com>"
+      "url": "https://nodejs-hw-mongodb-0he4.onrender.com"
     }
   ],
   "tags": [
@@ -416,7 +416,7 @@
           }
         ],
         "responses": {
-          "200": {
+          "204": {
             "description": "No Content",
             "content": {
               "application/json": {
@@ -425,7 +425,7 @@
                   "properties": {
                     "status": {
                       "type": "integer",
-                      "example": 200
+                      "example": 204
                     },
                     "message": {
                       "type": "string",
@@ -438,6 +438,9 @@
           },
           "401": {
             "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
           }
         }
       }
